@@ -1,0 +1,30 @@
+node_modules
+dist
+dist-ssr
+*.local
+.DS_Store
+.vite
+
+# Build artifacts
+tsconfig.tsbuildinfo
+
+# Secrets / env — never commit
+.env
+.env.*
+!.env.example
+*.bak
+
+# Keys / credentials
+*.key
+*.pem
+havitalk-ssh-key-*.key
+
+# Runtime data
+aihub-data
+
+# Local task artifacts (keep the .mjs tooling + reports tracked)
+tasks/*.jsonl
+tasks/*.log
+tasks/*.png
+tasks/*.json
+tasks/verify-sharecard.mjs

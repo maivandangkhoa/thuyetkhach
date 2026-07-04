@@ -1,0 +1,29 @@
+{
+  "name": "Thuyết Khách Hành",
+  "short_name": "Thuyết Khách",
+  "description": "Mỗi chương là một loại đối thủ. Thuyết phục AI, kiếm sao, lên cấp và chinh phục bảng xếp hạng.",
+  "lang": "vi",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0B0F19",
+  "theme_color": "#0B0F19",
+  "categories": ["games", "education"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Tiến trình chi tiết: mỗi người chỉ đọc/ghi document của chính mình.
+    match /gameProgress/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Bảng xếp hạng (tóm tắt công khai): mọi user đã đăng nhập đều đọc được;
+    // chỉ chủ sở hữu mới ghi document của mình.
+    match /leaderboard/{uid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}
