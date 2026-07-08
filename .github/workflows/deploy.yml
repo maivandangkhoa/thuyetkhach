@@ -1,0 +1,50 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+env:
+  REMOTE_DIR: /home/ubuntu/game
+  SERVICE: game
+  HEALTH_PORT: 8788
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/ci_key
+          chmod 600 ~/.ssh/ci_key
+          ssh-keyscan -H "${{ secrets.VM_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Sync code
+        run: |
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/ci_key" \
+            --exclude node_modules \
+            --exclude dist \
+            --exclude .git \
+            --exclude '*.key' \
+            --exclude .env \
+            ./ "ubuntu@${{ secrets.VM_HOST }}:${REMOTE_DIR}/"
+
+      - name: Build & restart on VM
+        run: |
+          ssh -i ~/.ssh/ci_key "ubuntu@${{ secrets.VM_HOST }}" \
+            "cd ${REMOTE_DIR} && npm install --no-audit --no-fund && npm run build \
+             && sudo systemctl restart ${SERVICE} && sleep 2 && systemctl is-active ${SERVICE}"
+
+      - name: Health check
+        run: |
+          ssh -i ~/.ssh/ci_key "ubuntu@${{ secrets.VM_HOST }}" \
+            "curl -fsS --max-time 8 http://localhost:${HEALTH_PORT}/api/health"
