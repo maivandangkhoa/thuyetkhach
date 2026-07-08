@@ -182,7 +182,7 @@ export default function ChapterMap({
                 Tài trợ bởi <span className="font-medium text-white">FechTin</span>
                 <span className="hidden sm:inline"> — </span>
               </span>
-              <span>Tin tài chính dành riêng cho bạn</span>
+              <span>Cùng bạn kiến tạo tự do tài chính</span>
             </span>
             <ArrowRight className="h-4 w-4 shrink-0" />
           </a>

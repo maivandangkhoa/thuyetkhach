@@ -206,7 +206,7 @@ const ConversationCard = forwardRef<
           color: 'rgba(255,255,255,0.6)',
         }}
       >
-        📈 Tin tài chính dành riêng cho bạn · fechtin.com
+        📈 Cùng bạn kiến tạo tự do tài chính · fechtin.com
       </div>
     </div>
   )

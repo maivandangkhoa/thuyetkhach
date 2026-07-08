@@ -307,7 +307,7 @@ export default function WinScreen({
                 <span className="text-base">📈</span> Tài trợ bởi{' '}
                 <span className="font-medium text-white">FechTin</span>
               </span>
-              <span>Tin tài chính dành riêng cho bạn</span>
+              <span>Cùng bạn kiến tạo tự do tài chính</span>
             </span>
           </a>
         </div>
